@@ -17,7 +17,7 @@ fun AlarmDisplay(modifier:Modifier = Modifier) {
     Column (
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF181A1B))
+            .background(Color(0xFF1885BB))
     ){
         Text(
             "This Is Home Screen"
