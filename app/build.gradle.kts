@@ -1,6 +1,12 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp" )
+    id("com.google.dagger.hilt.android")
+
+
 }
 
 android {
@@ -55,8 +61,11 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-    implementation("androidx.compose.material:material-icons-extended")
-  implementation(platform("androidx.compose:compose-bom-beta:2026.04.01"))
+    implementation(libs.androidx.compose.material.icons.extended)
+  implementation(platform(libs.androidx.compose.bom.beta))
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
 
 }
 
