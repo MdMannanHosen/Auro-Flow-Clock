@@ -9,18 +9,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 
-
-
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun AlarmDisplay(modifier:Modifier = Modifier) {
-    Column (
+fun AlarmDisplay(modifier: Modifier = Modifier) {
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFF1885BB))
-    ){
+    ) {
         Text(
-            "This Is Home Screen"
+            text = "This Is Home Screen"
         )
     }
 }

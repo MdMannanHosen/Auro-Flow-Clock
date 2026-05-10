@@ -12,8 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun DiscoverDisplay(modifier:Modifier = Modifier) {
+fun DiscoverDisplay(modifier: Modifier = Modifier) {
 
 }
