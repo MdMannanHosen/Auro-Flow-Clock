@@ -2,6 +2,8 @@
 agp = "9.1.1"
 composeBomBeta = "2026.04.01"
 coreKtx = "1.18.0"
+foundation = "1.11.1"
+gson = "2.14.0"
 hiltAndroid = "2.59.2"
 hiltAndroidCompiler = "2.59.2"
 junit = "4.13.2"
@@ -16,9 +18,11 @@ material3 = "1.4.0"
 
 [libraries]
 androidx-compose-bom-beta = { module = "androidx.compose:compose-bom-beta", version.ref = "composeBomBeta" }
+androidx-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

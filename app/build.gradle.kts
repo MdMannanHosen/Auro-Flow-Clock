@@ -62,11 +62,19 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
    implementation(platform(libs.androidx.compose.bom.beta))
     dependencies {
-        implementation("androidx.compose.foundation:foundation:1.11.1") // বা তার উপরের ভার্সন
+        implementation(libs.androidx.compose.foundation) // বা তার উপরের ভার্সন
     }
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
+    implementation("androidx.room:room-runtime:2.8.4")
+
+    // Kotlin Extension + Coroutines
+    implementation("androidx.room:room-ktx:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+
+    // Gson
+    implementation(libs.gson)
 
 }
 

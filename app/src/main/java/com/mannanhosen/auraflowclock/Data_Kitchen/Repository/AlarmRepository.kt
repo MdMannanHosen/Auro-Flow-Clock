@@ -1,0 +1,12 @@
+package com.mannanhosen.auraflowclock.Data_Kitchen.Repository
+
+import com.mannanhosen.auraflowclock.Data_Kitchen.Local.AlaramDao
+import com.mannanhosen.auraflowclock.Data_Kitchen.Model.Alarm
+import kotlinx.coroutines.flow.distinctUntilChanged
+import javax.inject.Inject
+
+class AlarmRepository @Inject constructor(private val alaramDao: AlaramDao) {
+
+   val alarmList = alaramDao.getAlarmsList().distinctUntilChanged()
+    suspend fun insert(alarm: Alarm) = alaramDao.insert(alarm)
+}
