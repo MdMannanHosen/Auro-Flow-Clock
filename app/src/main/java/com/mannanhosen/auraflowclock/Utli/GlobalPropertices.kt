@@ -15,5 +15,5 @@ object   GlobalPropertices {
     val dateTimeFormatter : DateTimeFormatter = DateTimeFormatter.ofPattern("EEE,MMMddd")
     @RequiresApi(Build.VERSION_CODES.O)
     val nextDay : LocalDateTime = LocalDateTime.now().plus(1, ChronoUnit.DAYS)
-    const val pandingIntentFlags = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+    const val pendingIntentFlags = PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
 }

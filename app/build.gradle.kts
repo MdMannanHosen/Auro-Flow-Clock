@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp" )
     id("com.google.dagger.hilt.android")
+
 }
 android {
     namespace = "com.mannanhosen.auraflowclock"
@@ -61,25 +62,24 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation(libs.androidx.compose.material.icons.extended)
-   implementation(platform(libs.androidx.compose.bom.beta))
-    dependencies {
-        implementation(libs.androidx.compose.foundation) // বা তার উপরের ভার্সন
-    }
+    implementation(platform(libs.androidx.compose.bom.beta))
+    implementation(libs.androidx.compose.foundation) // বা তার উপরের ভার্সন
+
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
-    implementation("androidx.room:room-runtime:2.8.4")
+    implementation(libs.androidx.room.runtime)
 
     // Kotlin Extension + Coroutines
-    implementation("androidx.room:room-ktx:2.8.4")
-    ksp("androidx.room:room-compiler:2.8.4")
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
     // Gson
     implementation(libs.gson)
 
     //Worker
-    implementation("androidx.work:work-runtime-ktx:2.11.2")
-    implementation("androidx.hilt:hilt-work:1.3.0")
+    implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
 
 
 }

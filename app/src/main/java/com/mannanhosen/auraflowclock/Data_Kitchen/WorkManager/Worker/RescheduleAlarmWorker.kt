@@ -30,6 +30,12 @@ class RescheduleAlarmWorker @AssistedInject constructor(
     override suspend fun doWork(): Result {
         return try {
 
+            val scheduleAlarms = alarmRepository.alarmList
+                .map { alarmList ->
+                    alarmList.filter { alarm ->  alarm.isScheduled}
+                }
+                .firstOrNull { it.isNotEmpty() }
+//            scheduleAlarms?.forEach { scheduleAlarmManager. }
 
             Result.success()
         } catch (throwable: Throwable) {

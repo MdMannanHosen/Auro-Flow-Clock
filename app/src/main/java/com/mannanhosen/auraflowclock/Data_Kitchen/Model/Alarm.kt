@@ -7,6 +7,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mannanhosen.auraflowclock.Utli.GlobalPropertices.nextDay
 import java.time.format.DateTimeFormatter
 
 @Entity(

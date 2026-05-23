@@ -9,4 +9,8 @@ class AlarmRepository @Inject constructor(private val alaramDao: AlaramDao) {
 
    val alarmList = alaramDao.getAlarmsList().distinctUntilChanged()
     suspend fun insert(alarm: Alarm) = alaramDao.insert(alarm)
+    suspend fun  getLastId() = alaramDao.getLastId()
+    suspend fun getAlarmById(id: Int) = alaramDao.getAlarmById(id)
+    fun getAlarmByTime(hour: String, minute : String, recurring : Boolean) =
+        alaramDao.getAlarmByTime(hour, minute, recurring)
 }
