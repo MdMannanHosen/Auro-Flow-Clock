@@ -1,11 +1,10 @@
 package com.mannanhosen.auraflowclock.Presentation_Table.alarm
 
-import android.provider.SyncStateContract.Helpers.update
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.mannanhosen.auraflowclock.Data_Kitchen.Manager.ScheduleAlarmManager
-import com.mannanhosen.auraflowclock.Data_Kitchen.Model.Alarm
+import com.mannanhosen.auraflowclock.Domain_MenuCard.Model.Alarm
 import com.mannanhosen.auraflowclock.Data_Kitchen.Repository.AlarmRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

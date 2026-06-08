@@ -44,15 +44,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavHostController
+import com.mannanhosen.auraflowclock.Presentation_Table.Navigation.AppRoutes
 import com.mannanhosen.auraflowclock.Presentation_Table.NavigationBar.Alarm.AlarmDisplay
 import com.mannanhosen.auraflowclock.Presentation_Table.NavigationBar.HomeScreen.HomeDisplay
 import com.mannanhosen.auraflowclock.Presentation_Table.NavigationBar.TimerScreen.TimerScreenDisplay
+import com.mannanhosen.auraflowclock.Presentation_Table.alarm.CreateAlarmScreen
 import com.mannanhosen.auraflowclock.R
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true, showSystemUi = true)
+//@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun MainScreen(modifier: Modifier = Modifier) {
+fun MainScreen(modifier: Modifier = Modifier,
+               navController: NavHostController
+) {
 
     val navItemList = listOf(
 
@@ -81,7 +87,8 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 FloatingActionButton(
 
                     onClick = {
-                        showCreateAlarm =true //ata ki kore call dite pari
+                        // ✅ এখানে 'alarm_sound' এর পরিবর্তে 'create_alarm' বা আপনার সঠিক রুটটি দিন
+                        navController.navigate("create_alarm")
                     },
                     containerColor = Color(0xFF100F0F),
                     contentColor = Color(0xFFDDDAD5),
@@ -169,6 +176,7 @@ fun MainScreen(modifier: Modifier = Modifier) {
             modifier = Modifier.padding(innerPadding),
             selectedIndex
         )
+
 
         // ✅ Bottom Sheet
         if (showSheet) {
@@ -262,7 +270,22 @@ fun MainScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
-        // end here
+
+    }
+
+        if (showCreateAlarm) {
+            Dialog(
+                onDismissRequest = { showCreateAlarm = false },
+                properties = androidx.compose.ui.window.DialogProperties(
+                    usePlatformDefaultWidth = false // ফুল স্ক্রিন ভিউ পাওয়ার জন্য
+                )
+            ) {
+                CreateAlarmScreen(
+                    navController = navController,
+                    onCancel = { showCreateAlarm = false },
+                    onSave = { showCreateAlarm = false }
+                )
+            }
     }
 }
 

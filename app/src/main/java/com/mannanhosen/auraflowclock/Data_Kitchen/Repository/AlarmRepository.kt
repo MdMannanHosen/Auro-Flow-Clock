@@ -1,7 +1,7 @@
 package com.mannanhosen.auraflowclock.Data_Kitchen.Repository
 
 import com.mannanhosen.auraflowclock.Data_Kitchen.Local.AlaramDao
-import com.mannanhosen.auraflowclock.Data_Kitchen.Model.Alarm
+import com.mannanhosen.auraflowclock.Domain_MenuCard.Model.Alarm
 import kotlinx.coroutines.flow.distinctUntilChanged
 import javax.inject.Inject
 

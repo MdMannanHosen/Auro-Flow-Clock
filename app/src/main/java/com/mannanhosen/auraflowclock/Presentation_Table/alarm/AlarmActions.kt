@@ -1,6 +1,6 @@
 package com.mannanhosen.auraflowclock.Presentation_Table.alarm
 
-import com.mannanhosen.auraflowclock.Data_Kitchen.Model.Alarm
+import com.mannanhosen.auraflowclock.Domain_MenuCard.Model.Alarm
 
 interface AlarmActions {
     fun updateAlarmCreationState(alarm: Alarm)

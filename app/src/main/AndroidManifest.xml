@@ -12,6 +12,12 @@
   android:supportsRtl="true"
   android:theme="@style/Theme.AuraFlowClock">
   <activity
+   android:name=".SoundActivity"
+   android:exported="false" />
+  <activity
+   android:name=".Presentation_Table.alarm.Sound"
+   android:exported="false" />
+  <activity
    android:name=".Presentation_Table.MainActivity"
    android:exported="true"
    android:label="@string/app_name"

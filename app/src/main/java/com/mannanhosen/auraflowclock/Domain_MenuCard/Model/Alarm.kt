@@ -1,4 +1,4 @@
-package com.mannanhosen.auraflowclock.Data_Kitchen.Model
+package com.mannanhosen.auraflowclock.Domain_MenuCard.Model
 
 import android.annotation.SuppressLint
 import androidx.room.Entity

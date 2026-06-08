@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.mannanhosen.auraflowclock.Data_Kitchen.Model.Alarm
+import com.mannanhosen.auraflowclock.Domain_MenuCard.Model.Alarm
 import kotlinx.coroutines.flow.Flow
 
 @Dao
