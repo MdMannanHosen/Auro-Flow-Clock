@@ -100,6 +100,7 @@ dependencies {
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
     // Preferences DataStore
     implementation("androidx.datastore:datastore-preferences:1.1.2")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 }
 
 
