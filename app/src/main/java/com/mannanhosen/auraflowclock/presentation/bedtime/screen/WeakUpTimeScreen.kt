@@ -1,4 +1,4 @@
-package com.mannanhosen.auraflowclock.presentation.bedtime.wakeuptime.screen
+package com.mannanhosen.auraflowclock.presentation.bedtime.screen
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -148,9 +148,8 @@ fun WeakUpTimeScreen() {
             Button(
                 onClick = {},
                 modifier = Modifier.fillMaxWidth()
-                    .height(56.dp)
-                    ,
-                colors = ButtonDefaults.buttonColors(
+                    .height(56.dp),
+                        colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF00E5A0)
                 )
             ) {
