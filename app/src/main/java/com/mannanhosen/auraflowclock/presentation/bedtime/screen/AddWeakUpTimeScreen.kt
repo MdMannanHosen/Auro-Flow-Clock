@@ -1,7 +1,9 @@
 package com.mannanhosen.auraflowclock.presentation.bedtime.screen
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,12 +13,16 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.WbSunny
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -27,6 +33,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,11 +45,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mannanhosen.auraflowclock.presentation.bedtime.components.TimeDial
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
+private val Bg        = Color(0xFF202224)
+private val Card      = Color(0xFF2A2C30)
+private val Accent    = Color(0xFFE91E63)
+private val Border    = Color(0xFF3A3C40)
+private val TextPri   = Color(0xFFDDDAD5)
+private val TextSec   = Color(0xFFE91E63)
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddWakeUpTimeScreen() {
+
+    val hour by remember { mutableStateOf(7) }
+    var isPm by remember { mutableStateOf(false) }
+    val amPm = if(isPm) "PM" else "AM"
 
     Scaffold(
         topBar = {
@@ -95,7 +120,8 @@ fun AddWakeUpTimeScreen() {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .background(Color(0xFF17191B))
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -142,7 +168,7 @@ fun AddWakeUpTimeScreen() {
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    // Bottom row: time + arrows (অপ্রয়োজনীয় স্পেস বাদ দিয়ে পারফেক্ট الignment করা হয়েছে)
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
@@ -190,9 +216,65 @@ fun AddWakeUpTimeScreen() {
                     }
                 }
             }
+
+            Spacer(Modifier.height(48.dp))
+            TimeDial(
+                hour = 7,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(Modifier.height(20.dp))
+
+            // ---- AM / PM segmented control ----
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Card, RoundedCornerShape(32.dp))
+                    .border(2.dp, Border, RoundedCornerShape(32.dp))
+                    .padding(4.dp)
+
+            ) {
+                listOf(false to "AM", true to "PM").forEach { (pm, label) ->
+                    val selected = isPm == pm
+                    Box(
+                        contentAlignment = Alignment.Center,
+                        modifier = Modifier
+                            .weight(1f)
+                            .height(48.dp)
+                            .background(
+                                if (selected) Color(0xFF00E5A0) else Color.Transparent,
+                                RoundedCornerShape(9.dp)
+                            )
+                            .clickable { isPm = pm }
+                    ) {
+                        Text(
+                            label,
+                            color = if (selected) Color.White else Color(0xFF00E5A0),
+                            fontSize = 16.sp, fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(48.dp))
+
+      // Done Button
+            Button(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth().height(48.dp),
+                shape = RoundedCornerShape(32.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00E5A0)),
+                ){
+                Text("Done", fontSize = 16.sp, fontWeight = FontWeight.Medium)
+            }
+
+
+
         }
-    }
-}
+         }
+        }
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
