@@ -1,5 +1,4 @@
 package com.mannanhosen.auraflowclock.presentation.bedtime.screen
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -38,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 private val BackgroundDark = Color(0xFF202224)
-private val AccentMint = Color(0xFF00E5A0)
+private val AccentMint = Color(0xFF00BFA5)
 private val CardSurface = Color(0xFF2A2D30)
 private val TextPrimary = Color(0xFFF5F7F6)
 private val TextSecondary = Color(0xFF8A8F94)
@@ -88,6 +87,7 @@ fun AsleepScreen(
             Column(
                 modifier = Modifier
                     .height(700.dp)
+                    .background(BackgroundDark)
                     .padding(horizontal = 20.dp)
                     .padding(bottom = 24.dp)
             ) {
@@ -110,7 +110,7 @@ fun AsleepScreen(
                 Spacer(modifier = Modifier.height(72.dp))
 
                 fallAsleepOptions.forEach { option ->
-                    val isSelected = option == selectedOption
+                    val isSelected = false
 
                     Row(
                         modifier = Modifier
@@ -185,4 +185,5 @@ fun PreviewAsleepScreen() {
         onDismiss = {},
         onDone = {}
     )
+
 }
