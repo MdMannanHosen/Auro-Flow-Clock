@@ -1,6 +1,7 @@
 package com.mannanhosen.auraflowclock.presentation.bedtime.components
 import android.R
 import android.R.attr.radius
+import android.R.attr.strokeWidth
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SliderDefaults.Track
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,14 +32,19 @@ import androidx.compose.ui.unit.sp
 import kotlin.math.cos
 import kotlin.math.sin
 
-private val Bg        = Color(0xFF202224)
-private val Card      = Color(0xFF2A2C30)
-private val Accent    = Color(0xFFE91E63)
-private val TextPri   = Color(0xFFDDDAD5)
-private val TextSec   = Color(0xFFE91E63)
-private val Border    = Color(0xFF3A3C40)
-private val Track     = Color(0xFF3A3C40)
-private val TickMajor = Color(0xFF55585E)
+private val AppBackground = Color(0xFF0B0F14)
+
+// Cards / Bottom Sheets
+private val CardBackground = Color(0xFF25282B)
+
+// Primary Text / Icons
+private val TextPrimary = Color(0xFFDDDAD5)
+
+// Secondary Text
+private val TextSecondary = Color(0xFF9CA3AF)
+
+// Accent
+private val AccentMint = Color(0xFF00BFA5)
 
 
 @Composable
@@ -64,7 +71,7 @@ private val TickMajor = Color(0xFF55585E)
 
             // Outer circular track
             drawCircle(
-                color = Track,
+                color = CardBackground,
                 radius = r,
                 style = Stroke(50f)
             )
@@ -75,7 +82,7 @@ private val TickMajor = Color(0xFF55585E)
                 val major = i % 3 == 0
                 val r1 = r - if (major) 16f else 9f
                 drawLine(
-                    TickMajor,
+                    color = TextPrimary,
                     Offset(c.x + r1 * sin(a).toFloat(), c.y - r1 * cos(a).toFloat()),
                     Offset(c.x + (r - 3f) * sin(a).toFloat(), c.y - (r - 3f) * cos(a).toFloat()),
                     strokeWidth = if (major) 4f else 2f
@@ -94,14 +101,14 @@ private val TickMajor = Color(0xFF55585E)
 
             // Glow
             drawCircle(
-                color = Color(0xFF00E5A0).copy(alpha = 0.2f),
+                color = AccentMint.copy(alpha = 0.2f),
                 radius = 48f,
                 center = dot
             )
 
             // Selected dot
             drawCircle(
-                color = Color(0xFF00E5A0) ,
+                color = AccentMint ,
                 radius = 30f,
                 center = dot
             )
@@ -179,7 +186,7 @@ private fun DialNumber(
 ) {
     Text(
         text = text,
-        color = Color.White,
+        color = TextPrimary,
         fontSize = 26.sp,
         fontWeight = FontWeight.SemiBold,
         textAlign = TextAlign.Center,

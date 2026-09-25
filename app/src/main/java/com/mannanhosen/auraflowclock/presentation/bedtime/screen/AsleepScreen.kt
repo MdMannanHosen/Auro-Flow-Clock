@@ -39,8 +39,8 @@ import androidx.compose.ui.unit.sp
 private val BackgroundDark = Color(0xFF202224)
 private val AccentMint = Color(0xFF00BFA5)
 private val CardSurface = Color(0xFF2A2D30)
-private val TextPrimary = Color(0xFFF5F7F6)
-private val TextSecondary = Color(0xFF8A8F94)
+private val TextPrimary = Color(0xFFDDDAD5)
+private val TextSecondary = Color(0xFF9CA3AF)
 private val fallAsleepOptions = listOf("10 min", "15 min", "20 min", "30 min")
 
 @OptIn(ExperimentalMaterial3Api::class)

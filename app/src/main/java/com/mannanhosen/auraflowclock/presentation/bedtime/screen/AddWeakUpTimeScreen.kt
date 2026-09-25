@@ -49,12 +49,19 @@ import com.mannanhosen.auraflowclock.presentation.bedtime.components.TimeDial
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-private val Bg        = Color(0xFF202224)
-private val Card      = Color(0xFF2A2C30)
-private val Accent    = Color(0xFFE91E63)
-private val Border    = Color(0xFF3A3C40)
-private val TextPri   = Color(0xFFDDDAD5)
-private val TextSec   = Color(0xFFE91E63)
+private val AppBackground = Color(0xFF0B0F14)
+
+// Cards / Bottom Sheets
+private val CardBackground = Color(0xFF25282B)
+
+// Primary Text / Icons
+private val TextPrimary = Color(0xFFDDDAD5)
+
+// Secondary Text
+private val TextSecondary = Color(0xFF9CA3AF)
+
+// Accent
+private val AccentMint = Color(0xFF00BFA5)
 
 
 
@@ -78,7 +85,7 @@ fun AddWakeUpTimeScreen() {
                             text = "Bedtime", // ঠিক করা হয়েছে (Bed Time থেকে Bedtime)
                             style = TextStyle(
                                 fontSize = 24.sp,
-                                color = Color(0xFFDDDAD5),
+                                color = TextSecondary,
                                 fontWeight = FontWeight.SemiBold
                             )
                         )
@@ -89,7 +96,7 @@ fun AddWakeUpTimeScreen() {
                             text = "Wake up feeling refreshed", // বানান ভুল ঠিক করা হয়েছে ('Weak up felling' থেকে)
                             style = TextStyle(
                                 fontSize = 14.sp,
-                                color = Color(0xFFA0A0A0),
+                                color = TextSecondary,
                                 fontWeight = FontWeight.Normal // W900 থেকে নরমাল করা হয়েছে যাতে প্রফেশনাল দেখায়
                             )
                         )
@@ -104,12 +111,12 @@ fun AddWakeUpTimeScreen() {
                             imageVector = Icons.Default.ArrowBack,
                             modifier = Modifier.size(24.dp),
                             contentDescription = null,
-                            tint = Color.White
+                            tint = TextPrimary
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF17191B) // ১ নম্বরের মতো পারফেক্ট ডার্ক শেড
+                    containerColor = AppBackground // ১ নম্বরের মতো পারফেক্ট ডার্ক শেড
                 )
             )
         }
@@ -119,7 +126,7 @@ fun AddWakeUpTimeScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .background(Color(0xFF17191B))
+                .background(AppBackground)
                 .padding(horizontal = 16.dp)
             .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -132,10 +139,10 @@ fun AddWakeUpTimeScreen() {
                     .fillMaxWidth()
                     .height(110.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color(0xFF25282B) // কার্ডের কালার ১ নম্বরের সাথে ম্যাচ করা হয়েছে
+                    containerColor = CardBackground // কার্ডের কালার ১ নম্বরের সাথে ম্যাচ করা হয়েছে
                 ),
                 elevation = CardDefaults.cardElevation(
-                    defaultElevation = 2.dp
+                    defaultElevation = 20.dp
                 ),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -153,7 +160,7 @@ fun AddWakeUpTimeScreen() {
                             imageVector = Icons.Default.WbSunny,
                             contentDescription = null,
                             modifier = Modifier.size(20.dp),
-                            tint = Color(0xFFA0A0A0)
+                            tint = TextPrimary
                         )
 
                         Spacer(modifier = Modifier.width(8.dp))
@@ -179,8 +186,8 @@ fun AddWakeUpTimeScreen() {
                         Text(
                             text = "7:00 AM",
                             fontSize = 32.sp,
-                            fontWeight = FontWeight.Light, // ১ নম্বরের ফন্ট ওয়েট অনুযায়ী স্লিম লুক
-                            color = Color(0xFFDDDAD5)
+                            fontWeight = FontWeight.SemiBold, // ১ নম্বরের ফন্ট ওয়েট অনুযায়ী স্লিম লুক
+                            color = TextPrimary
                         )
 
                         Spacer(modifier = Modifier.weight(1f))
@@ -195,7 +202,7 @@ fun AddWakeUpTimeScreen() {
                                 Icon(
                                     imageVector = Icons.Default.KeyboardArrowUp,
                                     contentDescription = null,
-                                    tint = Color(0xFFB8B8B8),
+                                    tint = TextPrimary,
                                     modifier = Modifier.size(22.dp)
                                 )
                             }
@@ -208,7 +215,7 @@ fun AddWakeUpTimeScreen() {
                                 Icon(
                                     imageVector = Icons.Default.KeyboardArrowDown,
                                     contentDescription = null,
-                                    tint = Color(0xFFB8B8B8),
+                                    tint = TextPrimary,
                                     modifier = Modifier.size(22.dp)
                                 )
                             }
@@ -229,8 +236,8 @@ fun AddWakeUpTimeScreen() {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Card, RoundedCornerShape(32.dp))
-                    .border(2.dp, Border, RoundedCornerShape(32.dp))
+                    .background(CardBackground, RoundedCornerShape(32.dp))
+                    .border(2.dp, CardBackground, RoundedCornerShape(32.dp))
                     .padding(4.dp)
 
             ) {
@@ -242,14 +249,14 @@ fun AddWakeUpTimeScreen() {
                             .weight(1f)
                             .height(48.dp)
                             .background(
-                                if (selected) Color(0xFF00E5A0) else Color.Transparent,
+                                if (selected) AccentMint else Color.Transparent,
                                 RoundedCornerShape(9.dp)
                             )
                             .clickable { isPm = pm }
                     ) {
                         Text(
                             label,
-                            color = if (selected) Color.White else Color(0xFF00E5A0),
+                            color = if (selected) TextPrimary else AccentMint,
                             fontSize = 16.sp, fontWeight = FontWeight.Medium
                         )
                     }
@@ -263,7 +270,7 @@ fun AddWakeUpTimeScreen() {
                 onClick = {},
                 modifier = Modifier.fillMaxWidth().height(48.dp),
                 shape = RoundedCornerShape(32.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00E5A0)),
+                colors = ButtonDefaults.buttonColors(containerColor = AccentMint),
                 ){
                 Text("Done", fontSize = 16.sp, fontWeight = FontWeight.Medium)
             }
