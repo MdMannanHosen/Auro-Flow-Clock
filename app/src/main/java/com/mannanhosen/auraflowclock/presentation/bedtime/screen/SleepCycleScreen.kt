@@ -1,4 +1,5 @@
  package com.mannanhosen.auraflowclock.presentation.bedtime.screen
+ import android.annotation.SuppressLint
  import androidx.compose.foundation.background
  import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -7,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,7 +25,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -41,7 +40,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.material.internal.TextScale
 
 private val BackgroundDark = Color(0xFF202224)
 private val AccentMint = Color(0xFF00BFA5)
@@ -62,38 +60,39 @@ private val sleepCycleOptions = listOf(
     SleepCycleOption(cycles = 4, bedTime = "1:00 AM", duration = "6h 00m")
 )
 
+@SuppressLint("SuspiciousIndentation")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SleepCycleScreen(
-    initiallySelected: Int = 6,
+    initiallySelectedCycle: Int = 6,
     onDismiss: () -> Unit,
     onDone: (Int) -> Unit
 ) {
 
     var isOpen: Boolean by remember { mutableStateOf(false) }
-    var selectedCycles by remember { mutableStateOf(initiallySelected) }
+    var selectedCycles by remember { mutableStateOf(initiallySelectedCycle) }
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-            .background(color = BackgroundDark),
-        contentAlignment = Alignment.Center
-    ) {
+//    Box(
+//        modifier = Modifier.fillMaxSize()
+//            .background(color = BackgroundDark),
+//        contentAlignment = Alignment.Center
+//    ) {
+//
+//        OutlinedButton(
+//            onClick = { isOpen = true },
+//            colors = ButtonDefaults.buttonColors(
+//                containerColor = AccentMint,
+//                contentColor = Color.White
+//            )
+//        ) {
+//            Text(
+//                text = "Open"
+//            )
+//        }
+//    }
 
-        OutlinedButton(
-            onClick = { isOpen = true },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = AccentMint,
-                contentColor = Color.White
-            )
-        ) {
-            Text(
-                text = "Open"
-            )
-        }
-    }
-
-    if (isOpen) {
+//    if (isOpen) {
         ModalBottomSheet(
             onDismissRequest = { isOpen = false; onDismiss() },
             sheetState = sheetState,
@@ -227,13 +226,14 @@ fun SleepCycleScreen(
             }
         }
     }
-}
+
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewSleepCycleScreen() {
     SleepCycleScreen(
-        initiallySelected = 6,
+        initiallySelectedCycle = 0,
         onDismiss = {},
         onDone = {}
     )

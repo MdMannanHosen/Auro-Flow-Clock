@@ -35,9 +35,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
@@ -48,31 +53,60 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mannanhosen.auraflowclock.R
 import com.mannanhosen.auraflowclock.presentation.bedtime.components.SleepCycleRing
-import com.mannanhosen.auraflowclock.presentation.bedtime.components.TimeDial
+import com.mannanhosen.auraflowclock.ui.theme.AccentMint
+import com.mannanhosen.auraflowclock.ui.theme.AppBackground
+import com.mannanhosen.auraflowclock.ui.theme.CardBackground
+import com.mannanhosen.auraflowclock.ui.theme.TextPrimary
+import com.mannanhosen.auraflowclock.ui.theme.TextSecondary
 
+private val fallAsleepOptions = listOf("10 min", "15 min", "20 min", "30 min")
 
-// Background
-private val AppBackground = Color(0xFF0B0F14)
-
-// Cards / Bottom Sheets
-private val CardBackground = Color(0xFF25282B)
-
-// Primary Text / Icons
-private val TextPrimary = Color(0xFFDDDAD5)
-
-// Secondary Text
-private val TextSecondary = Color(0xFF9CA3AF)
-
-// Accent
-private val AccentMint = Color(0xFF00BFA5)
-
-
-// Border / Stroke
-val BorderColor = Color(0xFF2A2F36)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddEditBedTimeScreen() {
+fun AddEditBedTimeScreen(
+    initiallySelected: String = "15 min",
+    onDismiss: () -> Unit,
+    initiallySelectedCycle: Int = 6,
+    onDone: (String) -> Unit
+) {
+
+    var isOpen by remember { mutableStateOf(false) }
+    var selectedOption by remember { mutableStateOf(initiallySelected) }
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var showAsleepSheet by remember { mutableStateOf(false) }
+    var showSleepCycleSheet  by remember { mutableStateOf(false) }
+    var fallAsleepTime by remember { mutableStateOf(initiallySelected) }
+    var selectedCycles: Int by remember { mutableIntStateOf(initiallySelectedCycle) }
+
+    //SleepCycleScreen
+    if(showSleepCycleSheet){
+        SleepCycleScreen(
+            initiallySelectedCycle = initiallySelectedCycle,
+            onDismiss = { showSleepCycleSheet = false },
+            onDone = {
+                selectedCycles = it
+                showSleepCycleSheet = false
+            }
+        )
+    }
+
+
+    //AsleepScreen
+    if (showAsleepSheet) {
+        AsleepScreen(
+            initiallySelected = fallAsleepTime,
+            onDismiss = { showAsleepSheet = false },
+            onDone = { selected ->
+                fallAsleepTime = selected
+                showAsleepSheet = false
+            }
+        )
+    }
+
+
+
+
     //scaffold
     Scaffold(
         topBar = {
@@ -129,7 +163,7 @@ fun AddEditBedTimeScreen() {
                 .fillMaxSize()
                 .padding(paddingValues)
                 .verticalScroll(rememberScrollState())
-            .padding(horizontal= 16.dp, vertical = 16.dp),
+                .padding(horizontal= 16.dp, vertical = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -175,7 +209,9 @@ fun AddEditBedTimeScreen() {
                         Spacer(modifier = Modifier.weight(1f))
 
                         IconButton(
-                            onClick = {},
+                            onClick = {
+
+                            },
                             modifier = Modifier.size(32.dp)
                         ) {
                             Icon(
@@ -190,7 +226,7 @@ fun AddEditBedTimeScreen() {
 
                     }
 
-                 // BedTime Circle design ui start
+                    // BedTime Circle design ui start
 
 
 
@@ -247,20 +283,20 @@ fun AddEditBedTimeScreen() {
                 durationText = "9h 00m"
             )
 
-         Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
 
             // Sleep cycle card
             Card(
                 modifier = Modifier
-                     .clickable(
+                    .clickable(
                         indication = ripple(
                             color = AccentMint
                         ),
-                interactionSource = remember { MutableInteractionSource() }
-            ) {
-                         println("Card clicked")// Card click
-            }
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        showSleepCycleSheet = true
+                    }
                     .fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(
@@ -393,7 +429,9 @@ fun AddEditBedTimeScreen() {
                         ),
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
-                        println("Card clicked")// Card click
+
+                        showAsleepSheet = true
+
                     },
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(
@@ -421,7 +459,7 @@ fun AddEditBedTimeScreen() {
                             ).border(
                                 width = 1.dp,
                                 color = Color.White
-                                .copy(alpha = 0.3f),
+                                    .copy(alpha = 0.3f),
                                 shape = CircleShape
                             ).padding(5.dp)
                                 .size(24.dp),
@@ -429,7 +467,7 @@ fun AddEditBedTimeScreen() {
                             contentDescription = "Sun Icon",
                             tint = Color.White,
 
-                        )
+                            )
                         Spacer(modifier = Modifier.width(12.dp))
 
 
@@ -533,36 +571,36 @@ fun AddEditBedTimeScreen() {
 
             Spacer(modifier = Modifier.height(36.dp))
 
-                Button(
-                    onClick = {
+            Button(
+                onClick = {
 
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable(
-                            indication = ripple(
-                                color = AccentMint
-                            ),
-                            interactionSource = remember { MutableInteractionSource() }
-                        ) {
-                            println("Card clicked")// Card click
-                        }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable(
+                        indication = ripple(
+                            color = AccentMint
+                        ),
+                        interactionSource = remember { MutableInteractionSource() }
+                    ) {
+                        println("Card clicked")// Card click
+                    }
 
-                        .padding(start = 20.dp, end = 20.dp)
-                        .height(56.dp),
-                    shape = RoundedCornerShape(36.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = AccentMint,
-                        contentColor = TextPrimary
+                    .padding(start = 20.dp, end = 20.dp)
+                    .height(56.dp),
+                shape = RoundedCornerShape(36.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = AccentMint,
+                    contentColor = TextPrimary
+                )
+            ) {
+                Text(
+                    text = "Done",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+
                     )
-                ) {
-                    Text(
-                        text = "Done",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold,
-
-                        )
-                }
+            }
 
         }
 
@@ -574,5 +612,9 @@ fun AddEditBedTimeScreen() {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun PreviewAddEditBedTimeScreen() {
-    AddEditBedTimeScreen()
+    AddEditBedTimeScreen(
+        initiallySelected = "15 min",
+        onDismiss = {},
+        onDone = {}
+    )
 }

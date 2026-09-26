@@ -19,35 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
-import com.mannanhosen.auraflowclock.presentation.add_edit_alarm.screen.AccentColor
-import com.mannanhosen.auraflowclock.presentation.add_edit_alarm.screen.TextPrimary
-import com.mannanhosen.auraflowclock.presentation.add_edit_alarm.screen.TextSecondary
-
-// Background
-private val AppBackground = Color(0xFF0B0F14)
-
-// Cards / Bottom Sheets
-private val CardBackground = Color(0xFF25282B)
-
-// Primary Text / Icons
-private val TextPrimary = Color(0xFFDDDAD5)
-
-// Secondary Text
-private val TextSecondary = Color(0xFF9CA3AF)
-
-// Accent
-private val AccentMint = Color(0xFF00BFA5)
+import com.mannanhosen.auraflowclock.ui.theme.AccentMint
+import com.mannanhosen.auraflowclock.ui.theme.TextPrimary
+import com.mannanhosen.auraflowclock.ui.theme.TextSecondary
 
 
-// Border / Stroke
-val BorderColor = Color(0xFF2A2F36)
-/**
- * Segmented circular ring showing recommended bedtime + sleep cycle summary,
- * matching the Bedtime screen's "Recommended bedtime" ring.
- *
- * @param totalSegments total number of dash segments drawn around the ring
- * @param filledSegments how many of those segments are highlighted (active) with AccentColor
- */
+
 @Composable
 fun SleepCycleRing(
     bedtimeText: String,
@@ -59,13 +36,13 @@ fun SleepCycleRing(
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxWidth(0.6f) // was fillMaxWidth() -> ring no longer spans full screen width
             .aspectRatio(1f)
-            .padding(24.dp),
+            .padding(12.dp), // was 24.dp
         contentAlignment = Alignment.Center
     ) {
         Canvas(modifier = Modifier.fillMaxWidth().aspectRatio(1f)) {
-            val strokeWidth = 14.dp.toPx()
+            val strokeWidth = 10.dp.toPx() // was 14.dp
             val gapAngleDegrees = 3f // gap between dashes
             val segmentSweep = (360f / totalSegments) - gapAngleDegrees
 
@@ -79,7 +56,7 @@ fun SleepCycleRing(
             var startAngle = -90f // start from top, like clock 12 o'clock
             repeat(totalSegments) { index ->
                 drawArc(
-                    color = if (index < filledSegments) AccentColor else TextSecondary,
+                    color = if (index < filledSegments) AccentMint else TextSecondary,
                     startAngle = startAngle,
                     sweepAngle = segmentSweep,
                     useCenter = false,
@@ -93,7 +70,7 @@ fun SleepCycleRing(
 
         // Center content
         Box(
-            modifier = Modifier.padding(48.dp),
+            modifier = Modifier.padding(20.dp), // was 48.dp
             contentAlignment = Alignment.Center
         ) {
             androidx.compose.foundation.layout.Column(
@@ -102,7 +79,7 @@ fun SleepCycleRing(
                 Icon(
                     imageVector = Icons.Filled.NightsStay,
                     contentDescription = null,
-                    tint = AccentColor,
+                    tint = AccentMint,
                     modifier = Modifier.padding(bottom = 4.dp)
                 )
                 Text(

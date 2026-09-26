@@ -1,5 +1,4 @@
 package com.mannanhosen.auraflowclock.presentation.add_edit_alarm.screen
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,11 +43,11 @@ import androidx.navigation.compose.rememberNavController
 import com.mannanhosen.auraflowclock.presentation.alarm.components.SettingsSwitch
 
 
-val BackgroundColor = Color(0xFF202224)
-val CardBackgroundColor = Color(0xFF2A2D30)
-val AccentColor = Color(0xFFE91E63)
-val TextPrimary = Color(0xFFFFFFFF)
-val TextSecondary = Color(0xFF9E9E9E)
+ private val BackgroundColor = Color(0xFF202224)
+ private val CardBackgroundColor = Color(0xFF2A2D30)
+ private val AccentColor = Color(0xFFE91E63)
+ private val TextPrimary = Color(0xFFFFFFFF)
+ private val TextSecondary = Color(0xFF9E9E9E)
 
 @ExperimentalMaterial3Api
 @Composable
